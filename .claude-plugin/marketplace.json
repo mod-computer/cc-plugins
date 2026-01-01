@@ -1,0 +1,13 @@
+{
+  "name": "mod-plugins",
+  "owner": {
+    "name": "Nas"
+  },
+  "plugins": [
+    {
+      "name": "mod-plugin",
+      "source": "./plugins/mod-plugin",
+      "description": "Adds a /review command for quick code reviews"
+    }
+  ]
+}
