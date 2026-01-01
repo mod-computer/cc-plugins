@@ -1,0 +1,8 @@
+{
+"name": "spec-plugin",
+"description": "Adds skills for writing specs and adding traces. Also adds a /review command for requirements and traces",
+"version": "1.0.0",
+"author": {
+"name": "Nas"
+}
+}

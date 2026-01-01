@@ -5,9 +5,9 @@
   },
   "plugins": [
     {
-      "name": "mod-plugin",
-      "source": "./plugins/mod-plugin",
-      "description": "Adds a /review command for quick code reviews"
+      "name": "spec-plugin",
+      "source": "./plugins/spec-plugin",
+      "description": "Adds skills for writing specs and adding traces. Also adds a /review command for requirements and traces"
     }
   ]
 }
