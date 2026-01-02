@@ -31,9 +31,12 @@ description: Review requirements and traces to identify gaps and address
 ## Annotation Formats
 
 **Requirements (in .md files):**
+
+CRITICAL: Glassware tag MUST be at the END of the requirement line:
 ```markdown
 ## Feature
-<glassware type="requirement" id="req-feature-1" />
+
+* Requirement description here. <glassware type="requirement" id="req-feature-1" />
 ```
 
 **Implementations (in .ts/.tsx files):**

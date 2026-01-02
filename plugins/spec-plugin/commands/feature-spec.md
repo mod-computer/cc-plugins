@@ -4,7 +4,7 @@ description: Write a feature specification with traceable glassware requirements
 
 # Write Feature Specification
 
-**Output:** `docs/specs/<feature-name>.spec.md` or `design/requirements.md`
+**Output:** `docs/specs/<feature-name>.md` or `specs/<feature-name>.md`
 
 ## Process
 
@@ -31,9 +31,9 @@ Follow the glassware approach: **formality on demand** - match the spec complexi
 
 ## Core Features
 
-* [Requirement description] <glassware type="requirement" id="req-001" />
-* [Requirement description] <glassware type="requirement" id="req-002" />
-* [Requirement description] <glassware type="requirement" id="req-003" />
+* [Requirement description] <glassware type="requirement" id="req-feature-001" />
+* [Requirement description] <glassware type="requirement" id="req-feature-002" />
+* [Requirement description] <glassware type="requirement" id="req-feature-003" />
 ```
 
 ### Full Format (for complex features)
@@ -63,74 +63,71 @@ created: YYYY-MM-DD
 
 ### UX Requirements
 
-<glassware type="requirement" id="req-ux-1" />
-[User-facing behavior, UI components, interaction flows, accessibility.]
-
-<glassware type="requirement" id="req-ux-2" />
-[Additional UX requirement. Use sub-IDs for related items: req-ux-2a, req-ux-2b]
+* [User-facing behavior, UI components, interaction flows, accessibility.] <glassware type="requirement" id="req-feature-ux-1" />
+* [Additional UX requirement.] <glassware type="requirement" id="req-feature-ux-2" />
 
 ### Business Logic Requirements
 
-<glassware type="requirement" id="req-bus-1" />
-[Validation rules, workflows, calculations, state transitions.]
+* [Validation rules, workflows, calculations, state transitions.] <glassware type="requirement" id="req-feature-bus-1" />
 
 ### Data Requirements
 
-<glassware type="requirement" id="req-data-1" />
-[Data structures, storage, relationships, migrations.]
+* [Data structures, storage, relationships, migrations.] <glassware type="requirement" id="req-feature-data-1" />
 
 ### Integration Requirements
 
-<glassware type="requirement" id="req-int-1" />
-[APIs, external services, data exchange formats.]
+* [APIs, external services, data exchange formats.] <glassware type="requirement" id="req-feature-int-1" />
 
 ### Infrastructure Requirements
 
-<glassware type="requirement" id="req-infra-1" />
-[Deployment, scaling, monitoring, security.]
+* [Deployment, scaling, monitoring, security.] <glassware type="requirement" id="req-feature-infra-1" />
 
 ### Performance Requirements
 
-<glassware type="requirement" id="req-perf-1" />
-[Latency targets, throughput, resource limits.]
+* [Latency targets, throughput, resource limits.] <glassware type="requirement" id="req-feature-perf-1" />
 
 ### Quality Requirements
 
-<glassware type="requirement" id="req-qual-1" />
-[Test coverage expectations, error handling, edge cases.]
+* [Test coverage expectations, error handling, edge cases.] <glassware type="requirement" id="req-feature-qual-1" />
 ```
 
-## Glassware Annotations
+## Glassware Tag Format
 
-Every requirement must have a glassware tag for traceability:
+**CRITICAL:** The glassware tag MUST be at the END of the requirement line:
 
 ```markdown
-<glassware type="requirement" id="req-unique-id" />
+# CORRECT - tag at end of line (glassware will parse this)
+* Login page shows "Continue with Google" button. <glassware type="requirement" id="req-auth-ux-1" />
+
+# WRONG - tag on separate line (glassware will NOT parse this)
+<glassware type="requirement" id="req-auth-ux-1" />
+Login page shows "Continue with Google" button.
 ```
 
 **ID Conventions:**
-- Simple: `req-001`, `req-002`
-- Categorized: `req-ux-1`, `req-bus-1`, `req-data-1`
-- Hierarchical: `req-ux-1`, `req-ux-1a`, `req-ux-1b`
+- Use namespaced IDs: `req-{feature}-{category}-{number}`
+- Examples: `req-auth-ux-1`, `req-ws-bus-2`, `req-collab-data-3`
+- This prevents ID collisions across specification files
 
 **Linking implementations:**
 
 ```typescript
-// glassware[type=implementation, id=impl-1, requirements=req-001]
-function doThing() { ... }
+// glassware[type=implementation, id=impl-auth-login, requirements=req-auth-ux-1]
+function handleLogin() { ... }
 
-// glassware-begin[type=implementation, id=impl-2, requirements=req-001,req-002]
+// glassware-begin[type=implementation, id=impl-auth-validate, requirements=req-auth-bus-1,req-auth-bus-2]
 if (condition) {
     handleCase();
 }
-// glassware-end[id=impl-2]
+// glassware-end[id=impl-auth-validate]
 ```
 
 ## Key Principles
 
 - **Formality on demand** - A tiny project doesn't need 7 categories; a complex feature might need all of them
 - **Specific and testable** - "bcrypt with cost=12" not "secure hashing"
-- **Every requirement gets a tag** - For traceability to implementation
+- **Tag at end of line** - Glassware only parses tags that are at the end of requirement text
+- **Namespaced IDs** - Use `req-{feature}-{category}-{number}` to avoid duplicates
 - **Only include relevant categories** - Skip sections that don't apply
 
 ## Writing Good Requirements
@@ -138,14 +135,16 @@ if (condition) {
 **Do:**
 - Be specific: "Response time under 200ms for 95th percentile"
 - Include acceptance criteria
-- Use hierarchical IDs for sub-requirements
+- Use namespaced IDs for uniqueness across files
 - Specify data formats and validation rules
+- Place glassware tag at END of the line
 
 **Don't:**
 - Write vague requirements: "make it fast", "handle errors gracefully"
 - Skip edge cases and error states
 - Forget validation rules
 - Add requirements that can't be verified
+- Put glassware tags on their own line
 
 ## Verification
 

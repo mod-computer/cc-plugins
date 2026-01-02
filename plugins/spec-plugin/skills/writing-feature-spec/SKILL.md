@@ -31,47 +31,68 @@ Key technical decisions and integration points.
 ## Requirements
 
 ### UX Requirements
-<glassware type="requirement" id="req-ux-1" />
-User-facing behavior, UI components, flows, accessibility.
+
+* User-facing behavior, UI components, flows, accessibility. <glassware type="requirement" id="req-feature-ux-1" />
 
 ### Business Logic Requirements
-<glassware type="requirement" id="req-bus-1" />
-Validation rules, workflows, calculations, state transitions.
+
+* Validation rules, workflows, calculations, state transitions. <glassware type="requirement" id="req-feature-bus-1" />
 
 ### Data Requirements
-<glassware type="requirement" id="req-data-1" />
-Data structures, storage, relationships, migrations.
+
+* Data structures, storage, relationships, migrations. <glassware type="requirement" id="req-feature-data-1" />
 
 ### Integration Requirements
-<glassware type="requirement" id="req-int-1" />
-APIs, external services, data exchange formats.
+
+* APIs, external services, data exchange formats. <glassware type="requirement" id="req-feature-int-1" />
 
 ### Infrastructure Requirements
-<glassware type="requirement" id="req-infra-1" />
-Deployment, scaling, monitoring, security.
+
+* Deployment, scaling, monitoring, security. <glassware type="requirement" id="req-feature-infra-1" />
 
 ### Performance Requirements
-<glassware type="requirement" id="req-perf-1" />
-Latency targets, throughput, resource limits.
+
+* Latency targets, throughput, resource limits. <glassware type="requirement" id="req-feature-perf-1" />
 
 ### Quality Requirements
-<glassware type="requirement" id="req-qual-1" />
-Test coverage, error handling, edge cases.
+
+* Test coverage, error handling, edge cases. <glassware type="requirement" id="req-feature-qual-1" />
 ```
+
+## Glassware Tag Format
+
+**CRITICAL:** Place glassware tags at the END of the requirement line, not on a separate line:
+
+```markdown
+# CORRECT - tag at end of line
+* Login page shows "Continue with Google" button. <glassware type="requirement" id="req-auth-ux-1" />
+
+# WRONG - tag on separate line (glassware won't parse this)
+<glassware type="requirement" id="req-auth-ux-1" />
+Login page shows "Continue with Google" button.
+```
+
+## ID Conventions
+
+Use unique, namespaced IDs to avoid collisions across spec files:
+- `req-auth-ux-1` (feature: auth, category: ux, number: 1)
+- `req-ws-bus-3` (feature: workspace, category: business logic, number: 3)
+- `req-collab-data-2` (feature: collaboration, category: data, number: 2)
 
 ## Writing Good Requirements
 
 **Do:**
 - Be specific and testable (e.g., "bcrypt with cost=12", not "secure hashing")
 - Include acceptance criteria
-- Use hierarchical IDs for sub-requirements (req-ux-1, req-ux-1a, req-ux-1b)
-- Add glassware tags for traceability
+- Use namespaced IDs to avoid duplicates (req-auth-ux-1, not req-ux-1)
+- Place glassware tag at END of the requirement line
 
 **Don't:**
 - Write vague requirements ("make it fast")
 - Skip edge cases and error states
 - Forget to specify data formats and validation rules
+- Put glassware tags on their own line
 
 ## Spec Location
 
-Save to: `docs/specs/<feature-name>.spec.md` or `.mod/specs/<feature-name>.spec.md`
+Save to: `docs/specs/<feature-name>.spec.md` or `specs/<feature-name>.md`

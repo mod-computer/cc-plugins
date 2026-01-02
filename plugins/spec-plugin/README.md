@@ -45,9 +45,12 @@ Guide for adding glassware-readable traces to code.
 ## Glassware Annotation Format
 
 **Requirements** (in markdown specs):
+
+CRITICAL: The glassware tag MUST be at the END of the requirement line:
 ```markdown
 ## Feature
-<glassware type="requirement" id="req-feature-1" />
+
+* Requirement description here. <glassware type="requirement" id="req-feature-1" />
 ```
 
 **Implementations** (in TypeScript):
